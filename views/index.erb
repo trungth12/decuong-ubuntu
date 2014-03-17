@@ -1,0 +1,35 @@
+<% if @danh_sach_mons %>
+<table class="table table-bordered">	
+	<thead>
+		<tr class="success">
+			<td>Stt</td>
+			<td>Mã môn học</td>
+			<td>Tên môn học</td>
+			<td>Tình trạng</td>
+			<td>Thao tác</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @danh_sach_mons.each_with_index do |mon, index| %>
+			<tr class="<%= index % 2 == 0 ? 'danger' : 'warning' %>">
+				<form action="/update_status" method="POST">
+				<td><%= index + 1 %></td>
+				<td><a href="/show/<%= mon[:ma_mon_hoc] %>" ><%= mon[:ma_mon_hoc] %></a></td>
+				<td><%= mon[:ten_mon_hoc] %></td>
+				<td><%= mon[:dang_bi_khoa] == false ? 'Chưa bị khóa' : 'Bị khóa' %></td>
+				<td>
+					<% if mon[:dang_bi_khoa] == false %>
+						<input type="hidden" name="stype" value="block" />
+						<input type="submit" class="btn btn-success" value="Khóa" />
+					<% else %>
+						<% if user.is_admin? %>
+							<input type="hidden" name="stype" value="unblock" />
+							<input type="submit" class="btn btn-success" value="Khóa" />
+						<% end %>
+					<% end %>
+				</td>
+			</tr>	
+		<% end %>
+	</tbody>
+</table>
+<% end %>

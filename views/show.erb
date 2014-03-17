@@ -1,0 +1,85 @@
+<% if flash[:success] %>
+	<div class="alert alert-success"><%= flash[:success]  %></div>
+<% end %>
+<h1><%= @res[:ten_mon_hoc] %></h1>
+<form id="carform" class="form-horizontal" role="form" action="/update/<%= @ma_mon_hoc %>" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">
+	<div class="form-group">
+		<label for="loai_mon_hoc" class="col-sm-2 control-label">Loại môn học:</label>
+		<div class="col-sm-5">						
+			<%= loai_mon_hoc(@loai_mon_hoc) %>			
+		</div>
+	</div>	
+	<div class="form-group">
+		<label for="ty_le_diem_qua_trinh" class="col-sm-2 control-label">Tỷ lệ điểm quá trình:</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="ty_le_diem_qua_trinh" type="text" name="ty_le_diem_qua_trinh" value="<%= @res[:ty_le_diem_qua_trinh] %>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="tong_so_tiet" class="col-sm-2 control-label">Tổng số tiết:</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="tong_so_tiet" type="text" name="tong_so_tiet" value="<%= @res[:tong_so_tiet] %>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="so_tiet_ly_thuyet" class="col-sm-2 control-label">Số tiết lý thuyết:</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="so_tiet_ly_thuyet" type="text" name="so_tiet_ly_thuyet" value="<%= @res[:so_tiet_ly_thuyet] %>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="so_tiet_thuc_hanh" class="col-sm-2 control-label">Số tiết thực hành:</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="so_tiet_thuc_hanh" type="text" name="so_tiet_thuc_hanh" value="<%= @res[:so_tiet_thuc_hanh] %>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="so_tiet_tu_hoc" class="col-sm-2 control-label">Số tiết tự học:</label>
+		<div class="col-sm-2">
+			<input class="form-control" value="<%= @res[:so_tiet_tu_hoc] %>" id="so_tiet_tu_hoc" type="text" name="so_tiet_tu_hoc" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="so_tiet_bai_tap" class="col-sm-2 control-label">Số tiết bài tập:</label>
+		<div class="col-sm-2">
+			<input class="form-control" value="<%= @res[:so_tiet_bai_tap] %>" id="so_tiet_bai_tap" type="text" name="so_tiet_bai_tap" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="so_tiet_thuc_te" class="col-sm-2 control-label">Số tiết đi thực tế:</label>
+		<div class="col-sm-2">
+			<input class="form-control" value="<%= @res[:so_tiet_thuc_te] %>" id="so_tiet_thuc_te" type="text" name="so_tiet_thuc_te" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="hinh_thuc_thi" class="col-sm-2 control-label">Hình thức thi:</label>
+		<div class="col-sm-5">						
+			<%= hinh_thuc_thi(@hinh_thuc_thi) %>			
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="thoi_gian_thi" class="col-sm-2 control-label">Thời gian thi:</label>	
+		<div class="col-sm-2">
+			<input class="form-control" id="thoi_gian_thi" type="text" name="thoi_gian_thi" value="<%= @res[:thoi_gian_thi] %>" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+		    <div class="col-md-2 col-md-offset-5"><label for="de_cuong_chi_tiet">Đề cương chi tết:</label></div>    
+		</div>		
+		<textarea class="input-block-level" id="summernote" name="de_cuong_chi_tiet" rows="18">
+</textarea>
+	</div>
+	<input type="submit" value="Update" class="btn btn-primary" />
+</form>
+<script type="text/javascript">
+	$(document).ready(function() {
+	  	$('#summernote').summernote({
+			height: "500px"
+		});
+		$('#summernote').code('<%= @res[:de_cuong_chi_tiet] %>');
+		var postForm = function() {
+			var content = $('textarea[name="de_cuong_chi_tiet"]').html($('#summernote').code());
+		}
+	});
+</script>

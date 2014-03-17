@@ -8,4 +8,8 @@ class User 	< ActiveRecord::Base
 		return nil unless id
 		User.find(id)
 	end
+
+	def is_admin?
+		return username == 'dungth@hpu.edu.vn'
+	end
 end

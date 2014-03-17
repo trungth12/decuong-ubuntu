@@ -1,50 +1,114 @@
+#encoding: utf-8
 class MainController < Sinatra::Base
   register Sinatra::ActiveRecordExtension	
   set :sessions => true
   set :database_file, "config/database.yml"
+  set :erb, :format => :html5
   set :root, Proc.new {File.expand_path(".",Dir.pwd)}
   set :views, Proc.new { File.join(root, "views") }
+  set :public_folder, Proc.new { File.join(root, "public") }
+  def user_service
+    @user_service || (@user_service = UserService.new)
+  end
   register do
     def auth (type)
       condition do
-        redirect "/login" unless send("is_#{type}?")
+        redirect "/login" unless session[:user_id]
       end
     end
   end
-
+  register Sinatra::Flash
   helpers do
     def is_user?
-      @user != nil
+      user != nil
+    end
+    def user
+      @user || (@user= User.find(session[:user_id]) if session[:user_id]) 
+    end
+    def hinh_thuc_thi(res1)
+      x = %w[B.Vệ BVPM PM TH TL Đài TNG TNPM VĐ]      
+      x.inject(""){|res, elem| res + "<label class='checkbox-inline'>
+  <input #{'checked' if res1.include?(elem)} name='hinh_thuc_thi[]' type='checkbox' value='#{elem}'>#{elem}
+</label>"}
+    end
+    def loai_mon_hoc(res1)
+      x = ['Chuyên đề', 'Đồ án môn học', 'Khóa luận tốt nghiệp', 'Kỹ năng', 'Lý thuyết', 'Thực hành', 'Thực tập tốt nghiệp', 'Thực tế môn học']
+      x.inject(""){|res, elem| res + "<label class='checkbox-inline'>
+  <input #{'checked' if res1.include?(elem)} name='loai_mon_hoc[]' type='checkbox' value='#{elem}'>#{elem}
+</label>"}
     end
   end
-
-  before do
-    if session[:user_id]
-      @user = User.find(session[:user_id])
-    else
-      @user = nil
-    end
+  
+  
+  get "/", :auth => :user do    
+    @danh_sach_mons = user_service.load_email(user.username)
+    erb :index, :layout => :application
   end
 
-  get "/" do
-    "Hello, anonymous."
+  get "/show/:ma_mon_hoc", :auth => :user do 
+    @ma_mon_hoc = params[:ma_mon_hoc]
+    @res = user_service.get_mon(@ma_mon_hoc)
+    @loai_mon_hoc = @res[:loai_mon_hoc] || "Chuyên đề"
+    @hinh_thuc_thi = @res[:hinh_thuc_thi] || "B.Vệ"
+    erb :show, :layout => :application
   end
 
-  get "/protected", :auth => :user do
-    "Hello, #{@user.username}."
+  post "/update/:ma_mon_hoc", :auth => :user do 
+    message = {
+      :user_name => 'hpuws',
+      :password =>  'yb2NqJPWYEq2Y9VyTZcpvg==',
+      :ma_mon_hoc => params[:ma_mon_hoc],
+      :loai_mon_hoc => params[:loai_mon_hoc].join(","),
+      :hinh_thuc_thi => params[:hinh_thuc_thi].join(","),
+      :thoi_gian_thi => params[:thoi_gian_thi].to_i,
+      :tong_so_tiet => params[:tong_so_tiet].to_i,
+      :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet].to_i,
+      :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh].to_i,
+      :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_i,
+      :so_tiet_bai_tap => params[:so_tiet_bai_tap].to_i,
+      :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_i,
+      :lich_trinh_du_kien => params[:lich_trinh_du_kien],
+      :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh],
+      :de_cuong_chi_tiet => params[:de_cuong_chi_tiet]
+    }
+    @res = user_service.update(message)
+    #erb :update, :layout => :application
+    flash[:success] = "Bạn đã cập nhật thành công" if @res.to_i == 1
+    redirect "/show/#{params[:ma_mon_hoc]}"
   end
 
   get "/login" do 
-  	erb :login, :layout => :layout
+  	erb :login, :layout => :application
   end
 
   post "/login" do
-    session[:user_id] = User.where(username: params[:username],password: params[:password]).first.id
-    redirect "/protected"
+    user = User.where(username: params[:username],password: params[:password]).first
+    if user
+      session[:user_id] = user.id    
+    else
+      flash[:error] = "Tài khoản không đúng, vui lòng đăng nhập lại"
+      redirect "/login"
+    end
+    redirect "/"
   end
 
   get "/logout" do
     session[:user_id] = nil
+    redirect "/"
+  end
+
+  get "/profile", :auth => :user do 
+    erb :profile, :layout => :application
+  end
+
+  post "/profile", :auth => :user do 
+    @res = user_service.change_password(user, params[:oldpassword], params[:newpassword])
+    if @res == 1
+      flash[:success] = "Bạn đã cập nhật mật khẩu thành công"
+    else
+      flash[:error] = "Mật khẩu cũ không đúng"
+    end
+    redirect "/profile"
   end
 end
 
