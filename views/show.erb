@@ -14,17 +14,11 @@
 		</div>
 	</div>	
 	<div class="form-group">
-		<label for="de_cuong_xay_dung_theo_huong" class="col-sm-2 control-label">Loại môn học:</label>
+		<label for="de_cuong_xay_dung_theo_huong" class="col-sm-2 control-label">Đề cương xây dựng theo hướng:</label>
 		<div class="col-sm-5">						
 			<%= de_cuong_xay_dung_theo_huong(@de_cuong_xay_dung_theo_huong) %>			
 		</div>
-	</div>	
-	<div class="form-group">
-		<label for="ty_le_diem_qua_trinh" class="col-sm-2 control-label">Tỷ lệ điểm quá trình:</label>
-		<div class="col-sm-2">
-			<input class="form-control" id="ty_le_diem_qua_trinh" type="text" name="ty_le_diem_qua_trinh" value="<%= @res[:ty_le_diem_qua_trinh] %>" />
-		</div>
-	</div>
+	</div>		
 	<div class="form-group">
 		<label for="tong_so_tiet" class="col-sm-2 control-label">Tổng số tiết:</label>
 		<div class="col-sm-2">
@@ -59,6 +53,12 @@
 		<label for="so_tiet_thuc_te" class="col-sm-2 control-label">Số tiết đi thực tế:</label>
 		<div class="col-sm-2">
 			<input class="form-control" value="<%= @res[:so_tiet_thuc_te] %>" id="so_tiet_thuc_te" type="text" name="so_tiet_thuc_te" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="ty_le_diem_qua_trinh" class="col-sm-2 control-label">Tỷ lệ điểm quá trình:</label>
+		<div class="col-sm-2">
+			<input class="form-control" id="ty_le_diem_qua_trinh" type="text" name="ty_le_diem_qua_trinh" value="<%= @res[:ty_le_diem_qua_trinh] %>" />
 		</div>
 	</div>
 	<div class="form-group">
