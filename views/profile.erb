@@ -1,7 +1,7 @@
 <% if flash[:success] %>
 	<div class="alert alert-success"><%= flash[:success]  %></div>
 <% else %>
-	<p class="error"><%= flash[:error]  %></p>
+	<p class="alert alert-danger"><%= flash[:error]  %></p>
 <% end %>
 <form action="/profile" method="POST">
 	<h4>Tên tài khoản:</h4> <%= user.username %>

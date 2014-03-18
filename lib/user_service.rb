@@ -38,4 +38,10 @@ class UserService
 			return 0
 		end
 	end
+	def update_status(message)
+		response = @client.call(:cau_hinh_mon_hoc_update_status, message: message)
+	    res_hash = response.body.to_hash
+	    ls = res_hash[:cau_hinh_mon_hoc_update_status_response][:cau_hinh_mon_hoc_update_status_result]
+    	return ls
+	end
 end

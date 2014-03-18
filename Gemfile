@@ -7,3 +7,4 @@ gem 'pg'
 gem "rake"
 gem "savon"
 gem "sinatra-flash"
+gem "json"

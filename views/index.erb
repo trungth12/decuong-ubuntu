@@ -1,3 +1,6 @@
+<% if flash[:success] %>
+	<div class="alert alert-success"><%= flash[:success]  %></div>
+<% end %>
 <% if @danh_sach_mons %>
 <table class="table table-bordered">	
 	<thead>
@@ -12,22 +15,16 @@
 	<tbody>
 		<% @danh_sach_mons.each_with_index do |mon, index| %>
 			<tr class="<%= index % 2 == 0 ? 'danger' : 'warning' %>">
-				<form action="/update_status" method="POST">
-				<td><%= index + 1 %></td>
-				<td><a href="/show/<%= mon[:ma_mon_hoc] %>" ><%= mon[:ma_mon_hoc] %></a></td>
-				<td><%= mon[:ten_mon_hoc] %></td>
-				<td><%= mon[:dang_bi_khoa] == false ? 'Chưa bị khóa' : 'Bị khóa' %></td>
-				<td>
-					<% if mon[:dang_bi_khoa] == false %>
-						<input type="hidden" name="stype" value="block" />
-						<input type="submit" class="btn btn-success" value="Khóa" />
-					<% else %>
-						<% if user.is_admin? %>
-							<input type="hidden" name="stype" value="unblock" />
-							<input type="submit" class="btn btn-success" value="Khóa" />
+				<form action="<%= '/update_status/' + mon[:ma_mon_hoc] %>" method="POST">
+					<td><%= index + 1 %></td>
+					<td><a href="/show/<%= mon[:ma_mon_hoc] %>" ><%= mon[:ma_mon_hoc] %></a></td>
+					<td><%= mon[:ten_mon_hoc] %></td>
+					<td><%= mon[:dang_bi_khoa] == false ? 'Chưa bị khóa' : 'Bị khóa' %></td>
+					<td>
+						<% if mon[:dang_bi_khoa] == false %>						<input type="submit" class="btn btn-success" value="Khóa" />
 						<% end %>
-					<% end %>
-				</td>
+					</td>
+				</form>
 			</tr>	
 		<% end %>
 	</tbody>

@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'json'
 class MainController < Sinatra::Base
   register Sinatra::ActiveRecordExtension	
   set :sessions => true
@@ -37,9 +38,17 @@ class MainController < Sinatra::Base
   <input #{'checked' if res1.include?(elem)} name='loai_mon_hoc[]' type='checkbox' value='#{elem}'>#{elem}
 </label>"}
     end
+    def de_cuong_xay_dung_theo_huong(res1)
+      x = ['Chuẩn AUN', 'Bộ GĐĐT', 'Tự học (30/70)']
+      x.inject(""){|res, elem| res + "<label class='checkbox-inline'>
+  <input #{'checked' if res1.include?(elem)} name='de_cuong_xay_dung_theo_huong[]' type='checkbox' value='#{elem}'>#{elem}
+</label>"}
+    end
   end
   
-  
+  after do    
+    p params
+  end
   get "/", :auth => :user do    
     @danh_sach_mons = user_service.load_email(user.username)
     erb :index, :layout => :application
@@ -50,15 +59,19 @@ class MainController < Sinatra::Base
     @res = user_service.get_mon(@ma_mon_hoc)
     @loai_mon_hoc = @res[:loai_mon_hoc] || "Chuyên đề"
     @hinh_thuc_thi = @res[:hinh_thuc_thi] || "B.Vệ"
+    @de_cuong_xay_dung_theo_huong = @res[:de_cuong_xay_dung_theo_huong] || "Bộ GGDT"
     erb :show, :layout => :application
   end
 
-  post "/update/:ma_mon_hoc", :auth => :user do 
-    message = {
+ 
+
+  post "/update/:ma_mon_hoc", :auth => :user do     
+    @message = {
       :user_name => 'hpuws',
       :password =>  'yb2NqJPWYEq2Y9VyTZcpvg==',
       :ma_mon_hoc => params[:ma_mon_hoc],
       :loai_mon_hoc => params[:loai_mon_hoc].join(","),
+      :de_cuong_xay_dung_theo_huong => params[:de_cuong_xay_dung_theo_huong].join(","),
       :hinh_thuc_thi => params[:hinh_thuc_thi].join(","),
       :thoi_gian_thi => params[:thoi_gian_thi].to_i,
       :tong_so_tiet => params[:tong_so_tiet].to_i,
@@ -66,15 +79,32 @@ class MainController < Sinatra::Base
       :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh].to_i,
       :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_i,
       :so_tiet_bai_tap => params[:so_tiet_bai_tap].to_i,
-      :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_i,
-      :lich_trinh_du_kien => params[:lich_trinh_du_kien],
+      :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_i,      
       :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh],
       :de_cuong_chi_tiet => params[:de_cuong_chi_tiet]
     }
-    @res = user_service.update(message)
+    @res = user_service.update(@message)
+    puts params[:x_noidung_baiviet].inspect
     #erb :update, :layout => :application
-    flash[:success] = "Bạn đã cập nhật thành công" if @res.to_i == 1
+    flash[:success] = "Bạn đã cập nhật thành công" if @res.to_i == 1    
     redirect "/show/#{params[:ma_mon_hoc]}"
+    #erb :update, :layout => :application
+  end
+
+  post "/update_status/:ma_mon_hoc" do
+    message = {
+      :user_name => 'hpuws',
+      :password =>  'yb2NqJPWYEq2Y9VyTZcpvg==',
+      :ma_mon_hoc => params[:ma_mon_hoc],
+      :dang_bi_khoa => true
+    }
+    @res = user_service.update_status(message)
+    if @res.to_i == 1
+      flash[:success] = "Cập nhật thành công"
+    else
+      flash[:error] = "Có lỗi xảy ra, vui lòng thử lại"
+    end
+    redirect "/"
   end
 
   get "/login" do 

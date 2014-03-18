@@ -1,12 +1,22 @@
 <% if flash[:success] %>
 	<div class="alert alert-success"><%= flash[:success]  %></div>
 <% end %>
+<% if flash[:dc] %>
+	<div class="alert alert-success"><%= flash[:dc]  %></div>
+<% end %>
 <h1><%= @res[:ten_mon_hoc] %></h1>
+<% if @res[:dang_bi_khoa] == false %>
 <form id="carform" class="form-horizontal" role="form" action="/update/<%= @ma_mon_hoc %>" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">
 	<div class="form-group">
 		<label for="loai_mon_hoc" class="col-sm-2 control-label">Loại môn học:</label>
 		<div class="col-sm-5">						
 			<%= loai_mon_hoc(@loai_mon_hoc) %>			
+		</div>
+	</div>	
+	<div class="form-group">
+		<label for="de_cuong_xay_dung_theo_huong" class="col-sm-2 control-label">Loại môn học:</label>
+		<div class="col-sm-5">						
+			<%= de_cuong_xay_dung_theo_huong(@de_cuong_xay_dung_theo_huong) %>			
 		</div>
 	</div>	
 	<div class="form-group">
@@ -67,19 +77,37 @@
 		<div class="row">
 		    <div class="col-md-2 col-md-offset-5"><label for="de_cuong_chi_tiet">Đề cương chi tết:</label></div>    
 		</div>		
-		<textarea class="input-block-level" id="summernote" name="de_cuong_chi_tiet" rows="18">
+		<textarea class="ckeditor" name="de_cuong_chi_tiet"><%= @res[:de_cuong_chi_tiet] %></textarea>		
 </textarea>
 	</div>
-	<input type="submit" value="Update" class="btn btn-primary" />
+	<input type="submit" value="Cập nhật" class="btn btn-primary" />
 </form>
-<script type="text/javascript">
-	$(document).ready(function() {
-	  	$('#summernote').summernote({
-			height: "500px"
-		});
-		$('#summernote').code('<%= @res[:de_cuong_chi_tiet] %>');
-		var postForm = function() {
-			var content = $('textarea[name="de_cuong_chi_tiet"]').html($('#summernote').code());
-		}
-	});
-</script>
+<% else %>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr class="success">
+					<td style="width:20%">Tính chất</td>
+					<td style="width:80%">Giá trị</td>					
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>Mã môn học</td><td><%= @res[:ma_mon_hoc] %></td></tr>
+				<tr><td>Tỷ lệ điểm quá trình</td><td><%= @res[:ty_le_diem_qua_trinh] %></td></tr>
+				<tr><td>Tổng số tiết</td><td><%= @res[:tong_so_tiet] %></td></tr>
+				<tr><td>Số tiết lý thuyết</td><td><%= @res[:so_tiet_ly_thuyet] %></td></tr>
+				<tr><td>Số tiết thực hành</td><td><%= @res[:so_tiet_thuc_hanh] %></td></tr>
+				<tr><td>Số tiết tự học</td><td><%= @res[:so_tiet_tu_hoc] %></td></tr>
+				<tr><td>Số tiết bài tập</td><td><%= @res[:so_tiet_bai_tap] %></td></tr>
+				<tr><td>Số tiết đi thực tế</td><td><%= @res[:so_tiet_thuc_te] %></td></tr>
+				<tr><td>Hình thức thi</td><td><%= @res[:hinh_thuc_thi] %></td></tr>
+				<tr><td>Thời gian thi</td><td><%= @res[:thoi_gian_thi] %></td></tr>
+				<tr><td>Đề cương chi tiết</td>
+					<td>
+						<p><%=  @res[:de_cuong_chi_tiet] %></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<% end %>
