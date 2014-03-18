@@ -39,7 +39,7 @@ class MainController < Sinatra::Base
 </label>"}
     end
     def de_cuong_xay_dung_theo_huong(res1)
-      x = ['Chuẩn AUN', 'Bộ GĐĐT', 'Tự học (30/70)']
+      x = ['Chuẩn AUN-QA', 'Bộ GĐĐT', 'Tự học (30/70)']
       x.inject(""){|res, elem| res + "<label class='checkbox-inline'>
   <input #{'checked' if res1.include?(elem)} name='de_cuong_xay_dung_theo_huong[]' type='checkbox' value='#{elem}'>#{elem}
 </label>"}
