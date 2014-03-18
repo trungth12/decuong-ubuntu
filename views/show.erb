@@ -1,9 +1,7 @@
 <% if flash[:success] %>
 	<div class="alert alert-success"><%= flash[:success]  %></div>
 <% end %>
-<% if flash[:dc] %>
-	<div class="alert alert-success"><%= flash[:dc]  %></div>
-<% end %>
+
 <h1><%= @res[:ten_mon_hoc] %></h1>
 <% if @res[:dang_bi_khoa] == false %>
 <form id="carform" class="form-horizontal" role="form" action="/update/<%= @ma_mon_hoc %>" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">

@@ -1,6 +1,6 @@
 <% if flash[:success] %>
 	<div class="alert alert-success"><%= flash[:success]  %></div>
-<% else %>
+<% elsif flash[:error] %>
 	<p class="alert alert-danger"><%= flash[:error]  %></p>
 <% end %>
 <form action="/profile" method="POST">
