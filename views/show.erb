@@ -22,43 +22,43 @@
 	<div class="form-group">
 		<label for="tong_so_tiet" class="col-sm-2 control-label">Tổng số tiết:</label>
 		<div class="col-sm-2">
-			<input class="form-control" id="tong_so_tiet" type="text" name="tong_so_tiet" value="<%= @res[:tong_so_tiet] %>" />
+			<input class="form-control" id="tong_so_tiet" type="text" name="tong_so_tiet" value="<%= @res[:tong_so_tiet] || 0 %>" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="so_tiet_ly_thuyet" class="col-sm-2 control-label">Số tiết lý thuyết:</label>
 		<div class="col-sm-2">
-			<input class="form-control" id="so_tiet_ly_thuyet" type="text" name="so_tiet_ly_thuyet" value="<%= @res[:so_tiet_ly_thuyet] %>" />
+			<input class="form-control" id="so_tiet_ly_thuyet" type="text" name="so_tiet_ly_thuyet" value="<%= @res[:so_tiet_ly_thuyet] || 0 %>" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="so_tiet_thuc_hanh" class="col-sm-2 control-label">Số tiết thực hành:</label>
 		<div class="col-sm-2">
-			<input class="form-control" id="so_tiet_thuc_hanh" type="text" name="so_tiet_thuc_hanh" value="<%= @res[:so_tiet_thuc_hanh] %>" />
+			<input class="form-control" id="so_tiet_thuc_hanh" type="text" name="so_tiet_thuc_hanh" value="<%= @res[:so_tiet_thuc_hanh] || 0 %>" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="so_tiet_tu_hoc" class="col-sm-2 control-label">Số tiết tự học:</label>
 		<div class="col-sm-2">
-			<input class="form-control" value="<%= @res[:so_tiet_tu_hoc] %>" id="so_tiet_tu_hoc" type="text" name="so_tiet_tu_hoc" />
+			<input class="form-control" value="<%= @res[:so_tiet_tu_hoc] || 0 %>" id="so_tiet_tu_hoc" type="text" name="so_tiet_tu_hoc" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="so_tiet_bai_tap" class="col-sm-2 control-label">Số tiết bài tập:</label>
 		<div class="col-sm-2">
-			<input class="form-control" value="<%= @res[:so_tiet_bai_tap] %>" id="so_tiet_bai_tap" type="text" name="so_tiet_bai_tap" />
+			<input class="form-control" value="<%= @res[:so_tiet_bai_tap] || 0 %>" id="so_tiet_bai_tap" type="text" name="so_tiet_bai_tap" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="so_tiet_thuc_te" class="col-sm-2 control-label">Số tiết đi thực tế:</label>
 		<div class="col-sm-2">
-			<input class="form-control" value="<%= @res[:so_tiet_thuc_te] %>" id="so_tiet_thuc_te" type="text" name="so_tiet_thuc_te" />
+			<input class="form-control" value="<%= @res[:so_tiet_thuc_te] || 0 %>" id="so_tiet_thuc_te" type="text" name="so_tiet_thuc_te" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="ty_le_diem_qua_trinh" class="col-sm-2 control-label">Tỷ lệ điểm quá trình:</label>
 		<div class="col-sm-2">
-			<input class="form-control" id="ty_le_diem_qua_trinh" type="text" name="ty_le_diem_qua_trinh" value="<%= @res[:ty_le_diem_qua_trinh] %>" />
+			<input class="form-control" id="ty_le_diem_qua_trinh" type="text" name="ty_le_diem_qua_trinh" value="<%= @res[:ty_le_diem_qua_trinh] || 0 %>" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -70,7 +70,7 @@
 	<div class="form-group">
 		<label for="thoi_gian_thi" class="col-sm-2 control-label">Thời gian thi:</label>	
 		<div class="col-sm-2">
-			<input class="form-control" id="thoi_gian_thi" type="text" name="thoi_gian_thi" value="<%= @res[:thoi_gian_thi] %>" />
+			<input class="form-control" id="thoi_gian_thi" type="text" name="thoi_gian_thi" value="<%= @res[:thoi_gian_thi] || 0 %>" />
 		</div>
 	</div>
 	<div class="form-group">

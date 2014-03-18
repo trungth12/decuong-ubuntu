@@ -57,9 +57,9 @@ class MainController < Sinatra::Base
   get "/show/:ma_mon_hoc", :auth => :user do 
     @ma_mon_hoc = params[:ma_mon_hoc]
     @res = user_service.get_mon(@ma_mon_hoc)
-    @loai_mon_hoc = @res[:loai_mon_hoc] || "Chuyên đề"
+    @loai_mon_hoc = @res[:loai_mon_hoc] || "Lý thuyết"
     @hinh_thuc_thi = @res[:hinh_thuc_thi] || "B.Vệ"
-    @de_cuong_xay_dung_theo_huong = @res[:de_cuong_xay_dung_theo_huong] || "Bộ GGDT"
+    @de_cuong_xay_dung_theo_huong = @res[:de_cuong_xay_dung_theo_huong] || "Bộ GĐĐT"
     erb :show, :layout => :application
   end
 
