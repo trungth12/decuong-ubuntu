@@ -101,7 +101,7 @@ class MainController < Sinatra::Base
     end
   end
 
-  get "/de_cuong_chi_tiet/:ma_mon_hoc.pdf" do 
+  get "/de_cuong_chi_tiet/:ma_mon_hoc?.pdf?" do 
     mon = Mon.where(ma_mon_hoc: params[:ma_mon_hoc]).first
     if mon
       File.open(mon.file.file.path) do |f|
