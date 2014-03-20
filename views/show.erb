@@ -75,11 +75,11 @@
 		
 		<% if @mon.file? %>
 			<div class="col-sm-2 offset-3">				
-				<label for="file"><a target="_blank" href="/de_cuong_chi_tiet/<%= @mon.ma_mon_hoc %>">Đề cương chi tết:</a></label>
+				<label for="file"><a target="_blank" href="/de_cuong_chi_tiet/<%= @mon.ma_mon_hoc %>.pdf">Đề cương chi tết:</a></label>
 				
 				<input type="submit" class="btn btn-danger" value="x" name="action" value="remove" />				
 			</div>
-			<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fdecuong.hpu.edu.vn%2Fde_cuong_chi_tiet%2FTDS33021&embedded=true" width="100%" height="780" style="border: none;"></iframe>
+			<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fdecuong.hpu.edu.vn%2Fde_cuong_chi_tiet%2F" + <%= @mon.ma_mon_hoc %> + ".pdf&embedded=true" width="100%" height="780" style="border: none;"></iframe>
 		<% else %>
 			<label for="file">Đề cương chi tết:</label><br />
 			<div class="col-sm-2">			
@@ -114,7 +114,7 @@
 				<tr><td>Đề cương chi tiết</td>
 					<td><% if @mon.file? %>
 						<div><a href="<%= @mon.file_url %>"><%=  @mon.ma_mon_hoc %></a></div>
-						<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fdecuong.hpu.edu.vn%2Fde_cuong_chi_tiet%2F"+ <%= @mon.ma_mon_hoc %> +"1&embedded=true" width="100%" height="780" style="border: none;"></iframe>
+						<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fdecuong.hpu.edu.vn%2Fde_cuong_chi_tiet%2F"+ <%= @mon.ma_mon_hoc %> +".pdf&embedded=true" width="100%" height="780" style="border: none;"></iframe>
 						<% end %>
 					</td>	
 				</tr>
