@@ -1,5 +1,4 @@
-class User 	< ActiveRecord::Base
-		
+class User 	< ActiveRecord::Base	
 	def self.authenticate(u, p)
 		User.where(username: u, password: p).first
 	end
@@ -13,3 +12,4 @@ class User 	< ActiveRecord::Base
 		return username == 'dungth@hpu.edu.vn'
 	end
 end
+

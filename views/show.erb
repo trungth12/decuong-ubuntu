@@ -71,13 +71,23 @@
 			<input class="form-control" id="thoi_gian_thi" type="text" name="thoi_gian_thi" value="<%= @res[:thoi_gian_thi] || 0 %>" />
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="row">
-		    <div class="col-md-2 col-md-offset-5"><label for="de_cuong_chi_tiet">Đề cương chi tết:</label></div>    
-		</div>		
-		<textarea class="ckeditor" name="de_cuong_chi_tiet"><%= @res[:de_cuong_chi_tiet] %></textarea>		
-</textarea>
+	<div class="form-group">		
+		
+		<% if @mon.file? %>
+			<div class="col-sm-2 offset-3">				
+				<label for="file"><a target="_blank" href="/de_cuong_chi_tiet/<%= @mon.ma_mon_hoc %>">Đề cương chi tết:</a></label>
+				
+				<input type="submit" class="btn btn-danger" value="x" name="action" value="remove" />
+			</div>
+		<% else %>
+			<label for="file">Đề cương chi tết:</label><br />
+			<div class="col-sm-2">			
+					<input type="file" name="file" />			
+			</div>
+		<% end %>
 	</div>
+	
+
 	<input type="submit" value="Cập nhật" class="btn btn-primary" />
 </form>
 <% else %>
@@ -101,8 +111,9 @@
 				<tr><td>Hình thức thi</td><td><%= @res[:hinh_thuc_thi] %></td></tr>
 				<tr><td>Thời gian thi</td><td><%= @res[:thoi_gian_thi] %></td></tr>
 				<tr><td>Đề cương chi tiết</td>
-					<td>
-						<p><%=  @res[:de_cuong_chi_tiet] %></p>
+					<td><% if @mon.file? %>
+						<p><a href="<%= @mon.file_url %>"><%=  @mon.ma_mon_hoc %></a></p>
+						<% end %>
 					</td>
 				</tr>
 			</tbody>

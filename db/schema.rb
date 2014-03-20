@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313012814) do
+ActiveRecord::Schema.define(version: 20140320015115) do
+
+  create_table "mons", force: true do |t|
+    t.string "ma_mon_hoc"
+    t.string "file"
+  end
 
   create_table "users", force: true do |t|
     t.string "username"
