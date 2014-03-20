@@ -103,8 +103,12 @@ class MainController < Sinatra::Base
 
   get "/de_cuong_chi_tiet/:ma_mon_hoc" do 
     mon = Mon.where(ma_mon_hoc: params[:ma_mon_hoc]).first
-    File.open(mon.file.file.path) do |f|
-      send_file(f, :disposition => 'attachment', :filename => File.basename(f))
+    if mon
+      File.open(mon.file.file.path) do |f|
+        send_file(f, :disposition => 'attachment', :filename => File.basename(f))
+      end
+    else
+      erb :error, :layout => :application
     end
   end
 
