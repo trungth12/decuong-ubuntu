@@ -80,14 +80,14 @@ class MainController < Sinatra::Base
         :loai_mon_hoc => params[:loai_mon_hoc].join(","),
         :de_cuong_xay_dung_theo_huong => params[:de_cuong_xay_dung_theo_huong].join(","),
         :hinh_thuc_thi => params[:hinh_thuc_thi].join(","),
-        :thoi_gian_thi => params[:thoi_gian_thi],
+        :thoi_gian_thi => params[:thoi_gian_thi].to_i,
         :tong_so_tiet => params[:tong_so_tiet],
         :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet],
         :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh],
-        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc],
+        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_i,
         :so_tiet_bai_tap => params[:so_tiet_bai_tap],
         :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te],      
-        :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh],
+        :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh].to_i,
         :de_cuong_chi_tiet => ""
       }
       @res = user_service.update(@message)
