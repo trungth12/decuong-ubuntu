@@ -81,12 +81,12 @@ class MainController < Sinatra::Base
         :de_cuong_xay_dung_theo_huong => params[:de_cuong_xay_dung_theo_huong].join(","),
         :hinh_thuc_thi => params[:hinh_thuc_thi].join(","),
         :thoi_gian_thi => params[:thoi_gian_thi].to_i,
-        :tong_so_tiet => params[:tong_so_tiet].to_i,
-        :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet].to_i,
-        :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh].to_i,
-        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_i,
-        :so_tiet_bai_tap => params[:so_tiet_bai_tap].to_i,
-        :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_i,      
+        :tong_so_tiet => params[:tong_so_tiet].to_f,
+        :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet].to_f,
+        :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh].to_f,
+        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_f,
+        :so_tiet_bai_tap => params[:so_tiet_bai_tap].to_f,
+        :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_f,      
         :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh],
         :de_cuong_chi_tiet => ""
       }
