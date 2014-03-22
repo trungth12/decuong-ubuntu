@@ -84,9 +84,9 @@ class MainController < Sinatra::Base
         :tong_so_tiet => params[:tong_so_tiet],
         :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet],
         :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh],
-        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc].to_i,
-        :so_tiet_bai_tap => params[:so_tiet_bai_tap].to_i,
-        :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te].to_i,      
+        :so_tiet_tu_hoc => params[:so_tiet_tu_hoc],
+        :so_tiet_bai_tap => params[:so_tiet_bai_tap],
+        :so_tiet_di_thuc_te => params[:so_tiet_di_thuc_te],      
         :ty_le_diem_qua_trinh => params[:ty_le_diem_qua_trinh].to_i,
         :de_cuong_chi_tiet => ""
       }
