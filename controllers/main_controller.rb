@@ -80,7 +80,7 @@ class MainController < Sinatra::Base
         :loai_mon_hoc => params[:loai_mon_hoc].join(","),
         :de_cuong_xay_dung_theo_huong => params[:de_cuong_xay_dung_theo_huong].join(","),
         :hinh_thuc_thi => params[:hinh_thuc_thi].join(","),
-        :thoi_gian_thi => params[:thoi_gian_thi].to_i,
+        :thoi_gian_thi => params[:thoi_gian_thi],
         :tong_so_tiet => params[:tong_so_tiet],
         :so_tiet_ly_thuyet => params[:so_tiet_ly_thuyet],
         :so_tiet_thuc_hanh => params[:so_tiet_thuc_hanh],

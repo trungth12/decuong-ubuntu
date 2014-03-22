@@ -9,3 +9,5 @@ gem "savon"
 gem "sinatra-flash"
 gem "json"
 gem 'carrierwave'
+gem 'rest_client'
+gem 'addressable'
