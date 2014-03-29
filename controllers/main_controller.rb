@@ -54,7 +54,7 @@ class MainController < Sinatra::Base
     erb :index, :layout => :application
   end
 
-  get "/show/:ma_mon_hoc", :auth => :user do 
+  get "/show/:ma_mon_hoc" do 
     @ma_mon_hoc = params[:ma_mon_hoc]
     @mon = Mon.where(ma_mon_hoc: @ma_mon_hoc).first_or_create!
     @res = user_service.get_mon(@ma_mon_hoc)

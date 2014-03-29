@@ -3,7 +3,7 @@
 <% end %>
 
 <h1><%= @res[:ten_mon_hoc] %></h1>
-<% if @res[:dang_bi_khoa] == false %>
+<% if @res[:dang_bi_khoa] == false and is_user? %>
 <form id="carform" class="form-horizontal" role="form" action="/update/<%= @ma_mon_hoc %>" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">
 	<div class="form-group">
 		<label for="loai_mon_hoc" class="col-sm-2 control-label">Loại môn học:</label>
