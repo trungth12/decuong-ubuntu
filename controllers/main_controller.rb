@@ -3,9 +3,9 @@ require 'json'
 class MainController < Sinatra::Base
   register Sinatra::ActiveRecordExtension	
   set :sessions => true
-  set :database_file, "config/database.yml"
   set :erb, :format => :html5
   set :root, Proc.new {File.expand_path(".",Dir.pwd)}
+  set :database_file, "#{root}/config/database.yml"
   set :views, Proc.new { File.join(root, "views") }
   set :public_folder, Proc.new { File.join(root, "public") }
   def user_service

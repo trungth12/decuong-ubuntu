@@ -3,7 +3,7 @@ require 'rest_client'
 require "addressable/uri"
 class UserService
 	def initialize
-		@client = Savon.client(wsdl: "http://10.1.0.238:8082/HPUWebService.asmx?wsdl")
+		@client = Savon.client(wsdl: "http://10.1.0.236:8088/HPUWebService.asmx?wsdl")
 	end
 	def client
 		@client
