@@ -1,0 +1,4 @@
+1. Install ruby
+2. bundle install
+3. change databse.yml
+4. Run
