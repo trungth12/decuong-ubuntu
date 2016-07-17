@@ -90,22 +90,4 @@ GEM
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
 
-PLATFORMS
-  ruby
-  x86-mingw32
 
-DEPENDENCIES
-  addressable
-  carrierwave
-  json
-  pg
-  rake
-  rest_client
-  savon
-  sinatra-activerecord
-  sinatra-flash
-  sqlite3
-  thin
-
-BUNDLED WITH
-   1.12.5
