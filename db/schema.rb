@@ -12,12 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20140320015115) do
 
-  create_table "mons", force: true do |t|
+  create_table "mons", force: :cascade do |t|
     t.string "ma_mon_hoc"
     t.string "file"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
   end
