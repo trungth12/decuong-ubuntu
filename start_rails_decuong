@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## source ~/.rvm/scripts/rvm
+
+cd /home/su207/decuong-ubuntu
+
+RAILS_ENV=production bundle exec thin start -p 8181 
+##& echo $(lsof -ti:8282) >>/home/su207/Auto_start/pid/start_rails_decuong.pid
+

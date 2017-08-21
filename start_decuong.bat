@@ -1,1 +1,0 @@
-start "decuong" "1.bat"
